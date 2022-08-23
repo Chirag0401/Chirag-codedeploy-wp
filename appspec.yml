@@ -1,0 +1,15 @@
+version: 0.0
+os: linux
+files:
+    - source: /
+      destination: /var/www/html/
+
+hooks:
+  ApplicationStop:
+    - location: scripts/stopserver.sh
+      timeout: 50
+  AfterInstall:
+    - location: scripts/permissions.sh
+  ApplicationStart:
+    - location: scripts/startserver.sh
+      timeout: 50

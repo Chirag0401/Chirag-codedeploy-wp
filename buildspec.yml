@@ -1,0 +1,23 @@
+version: 0.2
+
+phases:
+    install:
+        commands:
+            - printenv
+            - echo "Installing"
+    pre_build:
+        commands:
+            - sudo apt update
+            - sed -i 's/$dbname/'$DB_NAME'/' wp-config.php
+            - sed -i 's/$dbuser/'$DB_USER'/' wp-config.php
+            - sed -i 's/$dbpassword/'$DB_PASSWORD'/' wp-config.php
+            - sed -i 's/$dbhost/'$DB_HOST'/' wp-config.php
+    build:
+            commands:
+                    - echo build started
+    post_build:
+            commands:
+                    - echo build complete.
+artifacts:
+  files:
+    - '**/*'
